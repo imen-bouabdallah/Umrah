@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/umrah/umrah.iml" filepath="$PROJECT_DIR$/umrah/umrah.iml" />
+      <module fileurl="file://$PROJECT_DIR$/umrah/android/umrah_android.iml" filepath="$PROJECT_DIR$/umrah/android/umrah_android.iml" />
+    </modules>
+  </component>
+</project>
