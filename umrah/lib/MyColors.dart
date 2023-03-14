@@ -1,5 +1,14 @@
 import 'package:flutter/material.dart';
 
+
+Color mainColor = const Color(0xff3E3832);
+Color buttonsColor = const Color(0xff5B5249);
+Color borderColor = const Color(0xffB3ABA8);
+Color textColor = const Color(0xff000000);
+Color textBorder = const Color(0xffD6872A);
+Color arrowColor = const Color(0xffB98856);
+
+
 ///build material color from hex color
 MaterialColor buildMaterialColor(Color color) {
   List strengths = <double>[.05];
