@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 
 Color mainColor = const Color(0xff3E3832);
+Color backgdColor = const Color(0xffffffff);
 Color buttonsColor = const Color(0xff5B5249);
 Color borderColor = const Color(0xffB3ABA8);
 Color textColor = const Color(0xff000000);

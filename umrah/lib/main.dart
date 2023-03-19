@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:umrah/Duaa_text.dart';
 import 'package:umrah/MyColors.dart';
 
 
@@ -17,19 +18,46 @@ class MyApp extends StatelessWidget {
 
       title: 'لنعتمر',
 
-      home: const MyHomePage(title: 'لنعتمر'),
-
       theme: ThemeData(
         primarySwatch: buildMaterialColor(mainColor), //app Bar color
+        appBarTheme: AppBarTheme(
+          color: mainColor,
+          iconTheme: IconThemeData(
+            color: Colors.white,
+          ),
+        )
       ),
+
+      home: Directionality(
+        textDirection: TextDirection.rtl,
+        child:  Scaffold(
+        backgroundColor: backgdColor ,
+        appBar: AppBar(
+          title:  const Text(
+            'لنعتمر',
+            style: TextStyle(
+              color: Colors.white,
+            ),
+          ),
+          backgroundColor: mainColor,
+          actions: <Widget>[
+            IconButton(
+              onPressed: () => {},
+              icon: const Icon(Icons.settings),
+            )
+          ],
+        ),
+
+        body:  MyHomePage(),
+      ),
+    ),
+
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
 
-  final String title;
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -37,58 +65,13 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
-  Widget itemCard(String title, String icon){ //TODO add tap function to each card
-    return InkWell( ///to make it clickable
-      onTap: () =>{}, ///handle the clics
-      child: Container(
-        // padding: const EdgeInsets.all(20), ///since it's in a grid view it'll do the job
-        decoration: BoxDecoration(
-          border: Border.all(
-            color: borderColor,
-            width: 2.0,
-          ),
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image.asset(
-                icon,
-              height: 50,
 
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Text(
-                title,
-              style: TextStyle(
-
-              ),
-              textAlign: TextAlign.center,
-            ),
-          ],
-        ),
-      ),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
 
 
-    return Scaffold(
-      appBar: AppBar(
-
-        title: Text(widget.title),
-
-        actions: <Widget>[
-          IconButton(
-              onPressed: () => {},
-              icon: Icon(Icons.settings),
-          )
-        ],
-      ),
-      body: Column(
+    return Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           ///So that the rest won't be too close to the app bar
@@ -138,6 +121,42 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ),
         ],
+    );
+  }
+
+  Widget itemCard(String title, String icon){ //TODO add tap function to each card
+    return InkWell( ///to make it clickable
+      onTap: () =>{
+        Navigator.push(context, MaterialPageRoute(builder: (context) => const DuaaOutline()) ),
+      }, ///handle the clics
+      child: Container(
+        // padding: const EdgeInsets.all(20), ///since it's in a grid view it'll do the job
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: borderColor,
+            width: 2.0,
+          ),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+              icon,
+              height: 50,
+
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Text(
+              title,
+              style: const TextStyle(
+                fontSize: 18,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
       ),
     );
   }
