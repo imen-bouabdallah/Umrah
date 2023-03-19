@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:umrah/MyColors.dart';
 
+
 void main() {
   runApp(const MyApp());
 }
@@ -41,7 +42,6 @@ class _MyHomePageState extends State<MyHomePage> {
       onTap: () =>{}, ///handle the clics
       child: Container(
         // padding: const EdgeInsets.all(20), ///since it's in a grid view it'll do the job
-
         decoration: BoxDecoration(
           border: Border.all(
             color: borderColor,
@@ -59,7 +59,13 @@ class _MyHomePageState extends State<MyHomePage> {
             const SizedBox(
               height: 10,
             ),
-            Text(title),
+            Text(
+                title,
+              style: TextStyle(
+
+              ),
+              textAlign: TextAlign.center,
+            ),
           ],
         ),
       ),
@@ -90,23 +96,45 @@ class _MyHomePageState extends State<MyHomePage> {
             height: 20.0,
           ),
 
+          const Center(
+            ///The title
+            child: Text(
+              'ادعية العمرة',
+              style: TextStyle(
+                fontSize: 32,
+              ),
+            ),
+          ),
 
-          ///the gridView to display the options
-          Expanded(
-            child: GridView.count(
-              padding: EdgeInsets.all(20.0),
-              ///number of items per row
-              crossAxisCount: 3,
-              ///spqcing
-              mainAxisSpacing: 9.0,
-              crossAxisSpacing: 8.0,
-              children: <Widget>[
-                itemCard("testing", "assets/icons/kaaba.png"),
-                itemCard("testing", "assets/icons/tawaf.png"),
-                itemCard("testing", "assets/icons/kaaba.png"),
-                itemCard("testing", "assets/icons/kaaba.png"),
-                itemCard("testing", "assets/icons/kaaba.png"),
-              ],
+          const SizedBox(
+            height: 20.0,
+          ),
+          ///so that it starts display from right to left since it's in arabic
+          Directionality(
+          textDirection: TextDirection.rtl,
+          child: ///the gridView to display the options
+            Expanded(
+              child: GridView.count(
+                padding: EdgeInsets.all(20.0),
+                ///number of items per row
+                crossAxisCount: 3,
+                ///spqcing
+                mainAxisSpacing: 9.0,
+                crossAxisSpacing: 8.0,
+
+                childAspectRatio: (1 / 1.2),
+                children: <Widget>[
+                  itemCard("دعاء المسافر", "assets/icons/kaaba_travel.png"),
+                  itemCard("دعاء الإحرام", "assets/icons/muslim.png"),
+                  itemCard("دعاء النظرة الاولى", "assets/icons/kaaba.png"),
+                  itemCard("الحجر الأسود", "assets/icons/stone.png"),
+                  itemCard("ادعية الطواف", "assets/icons/tawaf.png"),
+                  itemCard("مقام ابراهيم", "assets/icons/kaaba.png"),
+                  itemCard("الصفا و المروة", "assets/icons/safa_marwa.png"),
+                  itemCard("أدعية منوعة", "assets/icons/duaa.png"),
+
+                ],
+              ),
             ),
           ),
         ],
