@@ -1,9 +1,13 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:umrah/MyColors.dart';
+import 'package:umrah/databaseService.dart';
+
 
 class DuaaOutline extends StatelessWidget {
-  const DuaaOutline({Key? key}) : super(key: key);
+  DuaaOutline({Key? key, required this.tableName}) : super(key: key);
+  final String tableName;
+
   @override
   Widget build(BuildContext context) {
     return Directionality(
@@ -31,7 +35,7 @@ class DuaaOutline extends StatelessWidget {
         ),
         margin: EdgeInsets.all(20),
 
-        //child: ,
+        child: DuaaText(tableName: this.tableName),
       ),
     ),
     );
@@ -39,16 +43,44 @@ class DuaaOutline extends StatelessWidget {
 }
 /// const DuaaText()
 class DuaaText extends StatefulWidget {
-  const DuaaText({Key? key}) : super(key: key);
+  const DuaaText( {Key? key, required this.tableName}) : super(key: key);
+  final String tableName;
 
   @override
-  State<DuaaText> createState() => _DuaaTextState();
+  State<DuaaText> createState() => _DuaaTextState(tableName: this.tableName);
 }
 
 class _DuaaTextState extends State<DuaaText> {
+  _DuaaTextState( {Key? key, required this.tableName}) ;
+  final String tableName;
+
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return  SingleChildScrollView(
+      child: Directionality(
+        textDirection: TextDirection.rtl,
+        child: PrayerText(tableName),
+      ),
+    );
+  }
+
+  Widget PrayerText(String tableName){
+
+    List res = dataBaseService().getData(tableName);
+    int i;
+
+    Column column = Column();
+
+
+    for ( i=0; i<res.length; i++){
+      column.children.add(
+        Text(res[i]+
+            '\n',
+        )
+      );
+    }
+
+    return column;
   }
 }
 

@@ -127,7 +127,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget itemCard(String title, String icon){ //TODO add tap function to each card
     return InkWell( ///to make it clickable
       onTap: () =>{
-        Navigator.push(context, MaterialPageRoute(builder: (context) => const DuaaOutline()) ),
+        Navigator.push(context, MaterialPageRoute(builder: (context) => DuaaOutline(tableName: title)) ),
       }, ///handle the clics
       child: Container(
         // padding: const EdgeInsets.all(20), ///since it's in a grid view it'll do the job
