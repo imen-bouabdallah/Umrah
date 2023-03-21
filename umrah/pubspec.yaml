@@ -40,9 +40,10 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  sqlite3: ^1.10.0
-  sqflite: ^2.2.6
-  path: ^1.8.0
+
+  sqflite:
+  path_provider: ^2.0.13
+  path:
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -66,6 +67,7 @@ flutter:
   assets:
     - assets/icons/
     - assets/DataBase/
+    - assets/DataBase/prayer.db.sql
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 

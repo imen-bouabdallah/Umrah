@@ -114,6 +114,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   itemCard("ادعية الطواف", "assets/icons/tawaf.png"),
                   itemCard("مقام ابراهيم", "assets/icons/kaaba.png"),
                   itemCard("الصفا و المروة", "assets/icons/safa_marwa.png"),
+                  itemCard("أدعية منوعة", "assets/icons/madina.png"),
                   itemCard("أدعية منوعة", "assets/icons/duaa.png"),
 
                 ],

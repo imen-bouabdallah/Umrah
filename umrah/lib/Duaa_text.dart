@@ -1,12 +1,16 @@
 
 import 'package:flutter/material.dart';
+import 'package:umrah/Duaa.dart';
 import 'package:umrah/MyColors.dart';
 import 'package:umrah/databaseService.dart';
+
 
 
 class DuaaOutline extends StatelessWidget {
   DuaaOutline({Key? key, required this.tableName}) : super(key: key);
   final String tableName;
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +38,7 @@ class DuaaOutline extends StatelessWidget {
           )
         ),
         margin: EdgeInsets.all(20),
-
+        width: double.infinity,
         child: DuaaText(tableName: this.tableName),
       ),
     ),
@@ -47,40 +51,82 @@ class DuaaText extends StatefulWidget {
   final String tableName;
 
   @override
-  State<DuaaText> createState() => _DuaaTextState(tableName: this.tableName);
+  State<DuaaText> createState() => _DuaaTextState(this.tableName);
 }
 
 class _DuaaTextState extends State<DuaaText> {
-  _DuaaTextState( {Key? key, required this.tableName}) ;
-  final String tableName;
+  String tableName;
+  _DuaaTextState(this.tableName);
+
+  late Future<List<Duaa>> _futureData = SQLiteDbProvider.db.fetch(tableName); ///get the data
+
 
   @override
   Widget build(BuildContext context) {
-    return  SingleChildScrollView(
+    return SingleChildScrollView( //TODO this doesnt fill up the screen
       child: Directionality(
-        textDirection: TextDirection.rtl,
-        child: PrayerText(tableName),
+          textDirection: TextDirection.rtl,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children:  [
+              SizedBox(
+                height: 20,
+              ),
+
+
+              Text(
+                tableName,
+                style: const TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+
+                ),
+                textAlign: TextAlign.center,
+              ),
+              GeneratePrayerText(tableName),
+
+            ],
+          )
+
       ),
     );
   }
 
-  Widget PrayerText(String tableName){
+ Widget GeneratePrayerText(String tableName){
 
-    List res = dataBaseService().getData(tableName);
-    int i;
+    return FutureBuilder<List<Duaa>>(
+        future: _futureData, 
+        builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            return Center(
+              child: Text('${snapshot.error}'),
+            );
+          }
 
-    Column column = Column();
+          if (snapshot.hasData) {
+            List<Duaa> items = snapshot.data!;
+            /*return ListView.builder(
+                itemCount: items.length,
+                itemBuilder: (context, index){
+                  Duaa item = items[index];
 
-
-    for ( i=0; i<res.length; i++){
-      column.children.add(
-        Text(res[i]+
-            '\n',
-        )
-      );
-    }
-
-    return column;
+                  return Text('$item');
+                }
+            );
+          }
+          return CircularProgressIndicator();
+        },*/
+            print('pka');
+            //print(snapshot.data.toString());
+            return Text(snapshot.data.toString());
+          }
+          return CircularProgressIndicator();
+        }
+    );
   }
+
+
+
 }
 
