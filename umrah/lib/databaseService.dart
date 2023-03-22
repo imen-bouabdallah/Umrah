@@ -1,47 +1,141 @@
 import 'dart:async';
 import 'dart:io';
+import 'dart:typed_data';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:umrah/CreateDB.dart';
 import 'package:umrah/Duaa.dart';
 
-class SQLiteDbProvider {
-  SQLiteDbProvider._();
-  static final SQLiteDbProvider db = SQLiteDbProvider._();
-  static Database? _database;
+class DB {
 
-  Future<Database?> get database async {
-    if (_database != null)
-      return _database;
-    _database = await initDB();
-    print(database);
-    return _database;
-  }
-  Future<Database >initDB() async {
-    Directory documentsDirectory = await
-    getApplicationDocumentsDirectory();
-    String path = join(documentsDirectory.path, "prayer.db.sql");
-    print(path);
-    var exists = await databaseExists(path);
-    print(exists);
+  static const _databaseName = "_prayers2.db";
+  static Future<Database> database() async{
+    return openDatabase(
+      _databaseName ,
+      onCreate: (db, version) {
+        db.execute(
+          CreateDB().create(),
+        );
+        db.execute(
+          CreateDB().create2(),
+        );
+        db.execute(
+          CreateDB().create3(),
+        );
+        db.execute(
+          CreateDB().create4(),
+        );
+        db.execute(
+          CreateDB().create5(),
+        );
+        db.execute(
+          CreateDB().create6(),
+        );
+        db.execute(
+          CreateDB().create7(),
+        );
+        db.execute(
+          CreateDB().create8(),
+        );
+        db.execute(
+          CreateDB().create9(),
+        );
+      },
 
-    return await openDatabase(
-        path, version: 1,
-        onOpen: (db) {},
+      version: 1,
     );
-  }
-  Future<List<Duaa>> fetch(String table) async {
-    final db = await database;
 
-    List<Map> results = await db!.rawQuery("SELECT * FROM [$table]");
-    List<Duaa> products = <Duaa>[];
-   /* results.forEach((result) {
+
+
+  }
+  static int x= 0;
+  /*Future<void> initDB() async {
+    final documentsDirectory = await getDatabasesPath();
+    final path = join(documentsDirectory, _databaseName);
+    print(path);
+    WidgetsFlutterBinding.ensureInitialized();
+    _database = await openDatabase(
+        path, version: 1,
+        onCreate: (db, version) async{
+          await db.execute(
+            CreateDB().create(),
+          );
+        },
+
+    );
+  }*/
+  Future<List<Duaa>> fetch(String table) async {
+    if (x==0){
+      insert();
+    }
+
+
+    final db = await DB.database();
+    List<Map> results = await db.rawQuery("SELECT * FROM [$table]");
+    return List.generate(results.length, (i) {
+      return Duaa(
+        id: results[i]['id'],
+        duaa: results[i]['duaa'],
+      );
+    });
+
+
+    /*results.forEach((result) {
       Duaa product = Duaa.fromMap(result);
       products.add(product);
     });*/
-    return products;
+
   }
 
+  Future<void> insert() async {
+    x = x+1;
+    final db = await DB.database();
+    db.rawQuery(CreateDB().insert7());
+    db.rawQuery(CreateDB().insert3());
+
+    db.rawQuery(CreateDB().insert());
+    db.rawQuery(CreateDB().insert_1());
+    db.rawQuery(CreateDB().insert_2());
+    db.rawQuery(CreateDB().insert_3());
+    db.rawQuery(CreateDB().insert_4());
+    db.rawQuery(CreateDB().insert_5());
+    db.rawQuery(CreateDB().insert_6());
+    db.rawQuery(CreateDB().insert_7());
+    db.rawQuery(CreateDB().insert_8());
+    db.rawQuery(CreateDB().insert_9());
+    db.rawQuery(CreateDB().insert_10());
+    db.rawQuery(CreateDB().insert_11());
+
+    db.rawQuery(CreateDB().insert2());
+    db.rawQuery(CreateDB().insert2_1());
+    db.rawQuery(CreateDB().insert2_2());
+    db.rawQuery(CreateDB().insert2_3());
+
+    db.rawQuery(CreateDB().insert4());
+    db.rawQuery(CreateDB().insert4_1());
+    db.rawQuery(CreateDB().insert4_2());
+
+    db.rawQuery(CreateDB().insert5());
+    db.rawQuery(CreateDB().insert5_1());
+
+
+    db.rawQuery(CreateDB().insert6_7());
+    db.rawQuery(CreateDB().insert6_6());
+    db.rawQuery(CreateDB().insert6_5());
+    db.rawQuery(CreateDB().insert6_4());
+    db.rawQuery(CreateDB().insert6_3());
+    db.rawQuery(CreateDB().insert6_2());
+    db.rawQuery(CreateDB().insert6_1());
+    db.rawQuery(CreateDB().insert6());
+
+    db.rawQuery(CreateDB().insert8());
+
+    db.rawQuery(CreateDB().insert9());
+
+  }
 }
 
 

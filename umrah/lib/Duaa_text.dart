@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:umrah/Duaa.dart';
 import 'package:umrah/MyColors.dart';
 import 'package:umrah/databaseService.dart';
-
+import 'databaseService.dart';
 
 
 class DuaaOutline extends StatelessWidget {
@@ -58,7 +58,7 @@ class _DuaaTextState extends State<DuaaText> {
   String tableName;
   _DuaaTextState(this.tableName);
 
-  late Future<List<Duaa>> _futureData = SQLiteDbProvider.db.fetch(tableName); ///get the data
+  late Future<List<Duaa>> _futureData = DB().fetch(tableName); ///get the data
 
 
   @override
@@ -96,6 +96,7 @@ class _DuaaTextState extends State<DuaaText> {
  Widget GeneratePrayerText(String tableName){
 
     return FutureBuilder<List<Duaa>>(
+
         future: _futureData, 
         builder: (context, snapshot) {
           if (snapshot.hasError) {
@@ -106,27 +107,39 @@ class _DuaaTextState extends State<DuaaText> {
 
           if (snapshot.hasData) {
             List<Duaa> items = snapshot.data!;
-            /*return ListView.builder(
-                itemCount: items.length,
-                itemBuilder: (context, index){
-                  Duaa item = items[index];
+            print(items.toString());
+            return Column(
 
-                  return Text('$item');
-                }
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: generateWidget(items),
+                   ),
+
+              ],
             );
+
+
           }
           return CircularProgressIndicator();
-        },*/
-            print('pka');
-            //print(snapshot.data.toString());
-            return Text(snapshot.data.toString());
-          }
-          return CircularProgressIndicator();
-        }
+        },
     );
   }
 
+ Text generateWidget(items){
+   String text = "";
+   for(int i =0; i<items.length; i++){
+      text = text + " - " + items[i].duaa + "\n\n";
+   }
 
+   return Text(
+       text,
+     style: TextStyle(
+       fontSize: 20,
+     ),
+   );
+ }
 
 }
 
