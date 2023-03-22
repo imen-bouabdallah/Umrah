@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.umrah.umrah">
    <application
-        android:label="umrah"
+        android:label="ِلنعتمر"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

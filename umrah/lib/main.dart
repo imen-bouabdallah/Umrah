@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:umrah/About.dart';
 import 'package:umrah/Duaa_text.dart';
 import 'package:umrah/MyColors.dart';
 
@@ -42,7 +43,9 @@ class MyApp extends StatelessWidget {
           backgroundColor: mainColor,
           actions: <Widget>[
             IconButton(
-              onPressed: () => {},
+              onPressed: () => {
+                MaterialPageRoute(builder: (context) => About())
+              },
               icon: const Icon(Icons.settings),
             )
           ],
