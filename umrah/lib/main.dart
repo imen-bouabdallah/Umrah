@@ -111,13 +111,14 @@ class _MyHomePageState extends State<MyHomePage> {
                 childAspectRatio: (1 / 1.2),
                 children: <Widget>[
                   itemCard("دعاء المسافر", "assets/icons/kaaba_travel.png"),
+                  itemCard("دعاء دخول المسجد", "assets/icons/madina.png"),
+                  itemCard("دعاء قبر الرسول", "assets/icons/grave.png"),
                   itemCard("دعاء الإحرام", "assets/icons/muslim.png"),
                   itemCard("دعاء النظرة الاولى", "assets/icons/kaaba.png"),
                   itemCard("الحجر الأسود", "assets/icons/stone.png"),
                   itemCard("ادعية الطواف", "assets/icons/tawaf.png"),
-                  itemCard("مقام ابراهيم", "assets/icons/kaaba.png"),
+                  itemCard("مقام ابراهيم", "assets/icons/minaret.png"),
                   itemCard("الصفا و المروة", "assets/icons/safa_marwa.png"),
-                  itemCard("دعاء دخول المسجد", "assets/icons/madina.png"),
                   itemCard("أدعية منوعة", "assets/icons/duaa.png"),
 
                 ],

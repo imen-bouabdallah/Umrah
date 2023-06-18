@@ -43,6 +43,9 @@ class DB {
         db.execute(
           CreateDB().create9(),
         );
+        db.execute(
+          CreateDB().create10(),
+        );
       },
 
       version: 1,
@@ -134,6 +137,10 @@ class DB {
     db.rawQuery(CreateDB().insert8());
 
     db.rawQuery(CreateDB().insert9());
+
+    db.rawQuery(CreateDB().insert10_1());
+    db.rawQuery(CreateDB().insert10_2());
+    db.rawQuery(CreateDB().insert10_3());
 
   }
 }
